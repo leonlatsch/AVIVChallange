@@ -1,9 +1,8 @@
 package dev.leonlatsch.avivchallange.listings.view
 
 import androidx.lifecycle.ViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
+import kotlinx.coroutines.flow.StateFlow
 
-@HiltViewModel
-class ListingsScreenViewModel @Inject constructor() : ViewModel() {
+abstract class ListingsScreenViewModel : ViewModel() {
+    abstract val uiState: StateFlow<ListingsUiState>
 }
