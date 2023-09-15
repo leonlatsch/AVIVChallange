@@ -11,7 +11,7 @@ class ListingLocalDataSource @Inject constructor(
     private val listingDao: ListingDao,
 ) {
 
-    fun observeListings(): Flow<List<ListingDao>> = try {
+    fun observeListings(): Flow<List<ListingEntity>> = try {
         listingDao.selectListings()
     } catch (e: IOException) {
         Log.e(ListingLocalDataSource::class.simpleName, "Error loading listings from database: $e")
@@ -23,5 +23,21 @@ class ListingLocalDataSource @Inject constructor(
     } catch (e: IOException) {
         Log.e(ListingLocalDataSource::class.simpleName, "Error loading listing $listingId from database: $e")
         emptyFlow()
+    }
+
+    fun insertListings(listings: List<ListingEntity>): Result<Unit> = try {
+        listingDao.insertListings(listings)
+        Result.success(Unit)
+    } catch (e: IOException) {
+        Log.e(ListingLocalDataSource::class.simpleName, "Error inserting listings: $e")
+        Result.failure(e)
+    }
+
+    fun insertListingDetail(listingDetail: ListingEntity): Result<Unit> = try {
+        listingDao.insertListingDetail(listingDetail)
+        Result.success(Unit)
+    } catch (e: IOException) {
+        Log.e(ListingLocalDataSource::class.simpleName, "Error inserting listing: $e")
+        Result.failure(e)
     }
 }
