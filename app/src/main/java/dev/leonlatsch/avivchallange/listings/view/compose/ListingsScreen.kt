@@ -6,6 +6,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -29,7 +30,7 @@ fun ListingsScreen(navController: NavHostController) {
 
     Scaffold(
         topBar = {
-            TopAppBar(title = { /*TODO*/ })
+            TopAppBar(title = { Text("Real Estate Listings") })
         },
         snackbarHost = {
             SnackbarHost(snackbarHostState)
