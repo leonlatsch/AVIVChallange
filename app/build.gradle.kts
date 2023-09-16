@@ -88,6 +88,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
 
+    // Coil - Image Loading
+    implementation("io.coil-kt:coil-compose:2.4.0")
+
     // Test
     testImplementation("com.google.dagger:hilt-android-testing:2.48")
     kaptTest("com.google.dagger:hilt-compiler:2.48")
