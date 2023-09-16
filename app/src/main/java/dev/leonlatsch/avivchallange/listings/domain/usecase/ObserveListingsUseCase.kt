@@ -5,11 +5,8 @@ import dev.leonlatsch.avivchallange.listings.domain.model.Listing
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class ObserveAndLoadListingDetailUseCase @Inject constructor(
+class ObserveListingsUseCase @Inject constructor(
     private val listingRepository: ListingRepository,
 ) {
-    suspend operator fun invoke(listingId: Int): Flow<Listing> {
-        listingRepository.loadListingDetail(listingId)
-        return listingRepository.observeListingDetail(listingId)
-    }
+    operator fun invoke(): Flow<List<Listing>> = listingRepository.observeListings()
 }

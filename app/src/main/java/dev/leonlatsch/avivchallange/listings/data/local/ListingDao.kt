@@ -17,8 +17,8 @@ interface ListingDao {
     fun selectListingDetail(listingId: Int): Flow<ListingEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertListings(listings: List<ListingEntity>)
+    suspend fun insertListings(listings: List<ListingEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertListingDetail(listings: ListingEntity)
+    suspend fun insertListingDetail(listings: ListingEntity)
 }

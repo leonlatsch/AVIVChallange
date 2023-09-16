@@ -1,6 +1,7 @@
 package dev.leonlatsch.avivchallange.listings.data.local
 
 import android.util.Log
+import dev.leonlatsch.avivchallange.core.Result
 import dev.leonlatsch.avivchallange.listings.data.local.model.ListingEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
@@ -25,19 +26,19 @@ class ListingLocalDataSource @Inject constructor(
         emptyFlow()
     }
 
-    fun insertListings(listings: List<ListingEntity>): Result<Unit> = try {
+    suspend fun insertListings(listings: List<ListingEntity>): Result<Unit> = try {
         listingDao.insertListings(listings)
-        Result.success(Unit)
+        Result.Success(Unit)
     } catch (e: IOException) {
         Log.e(ListingLocalDataSource::class.simpleName, "Error inserting listings: $e")
-        Result.failure(e)
+        Result.Error(e)
     }
 
-    fun insertListingDetail(listingDetail: ListingEntity): Result<Unit> = try {
+    suspend fun insertListingDetail(listingDetail: ListingEntity): Result<Unit> = try {
         listingDao.insertListingDetail(listingDetail)
-        Result.success(Unit)
+        Result.Success(Unit)
     } catch (e: IOException) {
         Log.e(ListingLocalDataSource::class.simpleName, "Error inserting listing: $e")
-        Result.failure(e)
+        Result.Error(e)
     }
 }

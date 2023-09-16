@@ -1,7 +1,5 @@
 package dev.leonlatsch.avivchallange.listings.view
 
-import dev.leonlatsch.avivchallange.listings.domain.model.Listing
-
 sealed interface ListingsUiState {
 
     data object Loading : ListingsUiState
@@ -9,7 +7,9 @@ sealed interface ListingsUiState {
     data object Error : ListingsUiState
 
     data class Content(
-        val listings: List<Listing>,
+        val listings: List<ListingCard>,
         val numberOfListings: Int,
+        val isRefreshing: Boolean,
+        val hasError: Boolean,
     ) : ListingsUiState
 }

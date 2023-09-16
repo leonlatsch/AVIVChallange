@@ -3,6 +3,7 @@ package dev.leonlatsch.avivchallange.di
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,7 +30,7 @@ object AppModule {
     @Singleton
     fun provideDatabase(
         @ApplicationContext appContext: Context
-    ): RoomDatabase = Room.databaseBuilder(
+    ): ListingDatabase = Room.databaseBuilder(
         appContext,
         ListingDatabase::class.java, DATABASE_NAME
     ).build()

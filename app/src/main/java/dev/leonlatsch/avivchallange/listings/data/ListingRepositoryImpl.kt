@@ -6,6 +6,7 @@ import dev.leonlatsch.avivchallange.listings.data.mapper.ListingResponseToEntity
 import dev.leonlatsch.avivchallange.listings.data.remote.ListingRemoteDataSource
 import dev.leonlatsch.avivchallange.listings.domain.ListingRepository
 import dev.leonlatsch.avivchallange.listings.domain.model.Listing
+import dev.leonlatsch.avivchallange.core.Result
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -27,19 +28,22 @@ class ListingRepositoryImpl @Inject constructor(
             listingEntityToDomainMapper.map(listingDetail)
         }
 
-    override suspend fun loadListings() {
-        remoteDataSource.getListings().onSuccess { listingsResponse ->
-            val listingEntities = listingsResponse.items.map { listingResponseToEntityMapper.map(it) }
-            localDataSource.insertListings(listingEntities)
+    override suspend fun loadListings(): Result<Unit> =
+        when (val result = remoteDataSource.getListings()) {
+            is Result.Success -> {
+                val listingEntities = result.data.items.map { listingResponseToEntityMapper.map(it) }
+                localDataSource.insertListings(listingEntities)
+            }
+            is Result.Error -> Result.Error(result.error)
+        }
+
+    override suspend fun loadListingDetail(listingId: Int): Result<Unit> {
+        return when (val result = remoteDataSource.getListingDetail(listingId)) {
+            is Result.Success -> {
+                val listingDetailEntity = listingResponseToEntityMapper.map(result.data)
+                localDataSource.insertListingDetail(listingDetailEntity)
+            }
+            is Result.Error -> Result.Error(result.error)
         }
     }
-
-    override suspend fun loadListingDetail(listingId: Int) {
-        remoteDataSource.getListingDetail(listingId).onSuccess { listingDetailResponse ->
-            val listingDetailEntity = listingResponseToEntityMapper.map(listingDetailResponse)
-            localDataSource.insertListingDetail(listingDetailEntity)
-        }
-    }
-
-
 }

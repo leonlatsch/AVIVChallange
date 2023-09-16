@@ -62,6 +62,9 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
 
+    implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
+    ksp("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
+
     // Dagger
     implementation("com.google.dagger:hilt-android:2.48")
     kapt("com.google.dagger:hilt-compiler:2.48")

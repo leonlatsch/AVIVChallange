@@ -8,8 +8,8 @@ import retrofit2.http.Path
 interface ListingApi {
 
     @GET("listings.json")
-    fun getListings(): ListingsResponse
+    suspend fun getListings(): ListingsResponse
 
     @GET("listings/{listingId}.json")
-    fun getListingDetail(@Path("listingId") listingId: Int): ListingResponse
+    suspend fun getListingDetail(@Path("listingId") listingId: Int): ListingResponse
 }

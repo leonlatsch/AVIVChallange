@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import dev.leonlatsch.avivchallange.R
 import dev.leonlatsch.avivchallange.listings.domain.model.Listing
+import dev.leonlatsch.avivchallange.listings.view.ListingCard
 import dev.leonlatsch.avivchallange.listings.view.ListingsUiState
 import dev.leonlatsch.avivchallange.theming.theme.AVIVChallangeTheme
 
@@ -33,7 +34,7 @@ fun ListingsContent(uiState: ListingsUiState.Content) {
         modifier = Modifier.padding(12.dp)
     ) {
         items(uiState.listings, key = { it.id }) { listing ->
-            ListingCard(
+            ListingItem(
                 listing = listing,
                 onClick = { TODO() },
             )
@@ -42,8 +43,8 @@ fun ListingsContent(uiState: ListingsUiState.Content) {
 }
 
 @Composable
-fun ListingCard(
-    listing: Listing,
+fun ListingItem(
+    listing: ListingCard,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -106,32 +107,32 @@ private fun ListingsContentPreview() {
         ListingsContent(
             ListingsUiState.Content(
                 listings = listOf(
-                    Listing(
+                    ListingCard(
                         id = 1,
-                        bedrooms = 4,
+                        bedrooms = "4 Bedrooms",
                         city = "Hamburg",
-                        area = 200f,
+                        area = "200 M2",
                         url = "https://v.seloger.com/s/crop/590x330/visuels/1/7/t/3/17t3fitclms3bzwv8qshbyzh9dw32e9l0p0udr80k.jpg",
-                        price = 1500000.0f,
+                        price = "150.000 €",
                         professional = "GSL EXPLORE",
                         propertyType = "Maison - Villa",
-                        offerType = 1,
-                        rooms = 8,
+                        rooms = "8 Rooms Total",
                     ),
-                    Listing(
+                    ListingCard(
                         id = 2,
-                        bedrooms = 4,
+                        bedrooms = "4 Bedrooms",
                         city = "Hamburg",
-                        area = 200f,
+                        area = "200 M2",
                         url = "https://v.seloger.com/s/crop/590x330/visuels/1/7/t/3/17t3fitclms3bzwv8qshbyzh9dw32e9l0p0udr80k.jpg",
-                        price = 1500000.0f,
+                        price = "150.000 €",
                         professional = "GSL EXPLORE",
                         propertyType = "Maison - Villa",
-                        offerType = 1,
-                        rooms = 8,
-                    )
+                        rooms = "8 Rooms Total",
+                    ),
                 ),
-                numberOfListings = 1
+                numberOfListings = 1,
+                isRefreshing = false,
+                hasError = false,
             )
         )
     }
