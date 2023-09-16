@@ -16,6 +16,7 @@ import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -120,11 +121,23 @@ fun ListingItem(
             ) {
                 Text(text = listing.price)
                 Text(text = listing.area)
-                Text(text = listing.bedrooms)
+                if (listing.bedrooms != null) {
+                    Text(text = listing.bedrooms)
+                }
             }
 
-            Text(text = listing.propertyType)
-            Text(text = listing.city)
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                Icon(painter = painterResource(R.drawable.ic_house), contentDescription = null)
+                Text(text = listing.propertyType)
+            }
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                Icon(painter = painterResource(R.drawable.ic_location), contentDescription = null)
+                Text(text = listing.city)
+            }
         }
     }
 }

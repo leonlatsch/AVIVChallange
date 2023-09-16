@@ -3,6 +3,8 @@ package dev.leonlatsch.avivchallange.listings.view
 import dev.leonlatsch.avivchallange.core.view.state.ErrorState
 import dev.leonlatsch.avivchallange.core.view.state.LoadingState
 import dev.leonlatsch.avivchallange.listings.domain.model.Listing
+import java.text.NumberFormat
+import java.util.Currency
 import javax.inject.Inject
 
 class ListingsUiStateFactory @Inject constructor() {
@@ -25,16 +27,21 @@ class ListingsUiStateFactory @Inject constructor() {
 
     // TODO: formatting
     private fun mapListingToUiModel(listing: Listing): ListingCard = with(listing) {
+        val currencyFormat = NumberFormat.getCurrencyInstance().apply {
+            maximumFractionDigits = 0
+            currency = Currency.getInstance("EUR")
+        }
+
         ListingCard(
             id = id,
-            bedrooms = bedrooms.toString(),
+            bedrooms = bedrooms?.let { "$it bedrooms" },
             city = city,
-            area = area.toString(),
+            area = "$area M²",
             url = url,
-            price = price.toString(),
+            price = currencyFormat.format(price),
             professional = professional,
             propertyType = propertyType,
-            rooms = rooms.toString()
+            rooms = "$rooms total rooms"
         )
     }
 }
