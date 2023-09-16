@@ -29,20 +29,27 @@ import dev.leonlatsch.avivchallange.theming.theme.AVIVChallangeTheme
 @Composable
 fun ListingsContent(uiState: ListingsUiState.Content) {
     LazyColumn(
-        verticalArrangement = Arrangement.spacedBy(32.dp)
+        verticalArrangement = Arrangement.spacedBy(32.dp),
+        modifier = Modifier.padding(12.dp)
     ) {
         items(uiState.listings, key = { it.id }) { listing ->
             ListingCard(
                 listing = listing,
-                onClick = { TODO() }
+                onClick = { TODO() },
             )
         }
     }
 }
 
 @Composable
-fun ListingCard(listing: Listing, onClick: () -> Unit) {
-    Column {
+fun ListingCard(
+    listing: Listing,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+    ) {
         Card {
             Box {
                 if (LocalInspectionMode.current) {
@@ -75,14 +82,20 @@ fun ListingCard(listing: Listing, onClick: () -> Unit) {
             }
         }
 
-        Row {
-            Text(text = listing.price.toString())
-            Text(text = listing.area.toString())
-            Text(text = listing.bedrooms.toString())
-        }
+        Column(
+            modifier = Modifier.padding(horizontal = 12.dp)
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                Text(text = listing.price.toString())
+                Text(text = listing.area.toString())
+                Text(text = listing.bedrooms.toString())
+            }
 
-        Text(text = listing.propertyType)
-        Text(text = listing.city)
+            Text(text = listing.propertyType)
+            Text(text = listing.city)
+        }
     }
 }
 

@@ -6,10 +6,12 @@ import androidx.activity.compose.setContent
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import dagger.hilt.android.AndroidEntryPoint
 import dev.leonlatsch.avivchallange.listings.view.compose.LISTINGS_SCREEN_NAV_PATH
 import dev.leonlatsch.avivchallange.listings.view.compose.ListingsScreen
 import dev.leonlatsch.avivchallange.theming.theme.AVIVChallangeTheme
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
