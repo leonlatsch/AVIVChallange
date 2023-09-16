@@ -1,10 +1,11 @@
 package dev.leonlatsch.avivchallange.listings.data.local.model
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity(tableName = "listing")
 data class ListingEntity(
-    val id: Int,
+    @PrimaryKey val id: Int,
     val bedrooms: Int,
     val city: String,
     val area: Float,

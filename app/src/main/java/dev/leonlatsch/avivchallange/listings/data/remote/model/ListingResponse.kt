@@ -5,7 +5,7 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class ListingResponse(
-    @PrimaryKey val id: Int,
+    val id: Int,
     val bedrooms: Int,
     val city: String,
     val area: Float,
