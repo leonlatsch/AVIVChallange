@@ -10,6 +10,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,21 +28,34 @@ import coil.compose.AsyncImage
 import dev.leonlatsch.avivchallange.R
 import dev.leonlatsch.avivchallange.listings.domain.model.Listing
 import dev.leonlatsch.avivchallange.listings.view.ListingCard
+import dev.leonlatsch.avivchallange.listings.view.ListingsUiEvent
 import dev.leonlatsch.avivchallange.listings.view.ListingsUiState
 import dev.leonlatsch.avivchallange.theming.theme.AVIVChallangeTheme
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ListingsContent(uiState: ListingsUiState.Content) {
-    LazyColumn(
-        verticalArrangement = Arrangement.spacedBy(32.dp),
-        modifier = Modifier.padding(12.dp)
+fun ListingsContent(uiState: ListingsUiState.Content, handleUiEvent: (ListingsUiEvent) -> Unit) {
+    val pullRefreshState = rememberPullRefreshState(
+        refreshing = uiState.isRefreshing,
+        onRefresh = { handleUiEvent(ListingsUiEvent.Refresh) }
+    )
+
+    Box(
+        modifier = Modifier.pullRefresh(pullRefreshState)
     ) {
-        items(uiState.listings, key = { it.id }) { listing ->
-            ListingItem(
-                listing = listing,
-                onClick = { TODO() },
-            )
+        LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(32.dp),
+            modifier = Modifier.padding(12.dp)
+        ) {
+            items(uiState.listings, key = { it.id }) { listing ->
+                ListingItem(
+                    listing = listing,
+                    onClick = { handleUiEvent(ListingsUiEvent.OpenListing(listing.id)) },
+                )
+            }
         }
+
+        PullRefreshIndicator(uiState.isRefreshing, pullRefreshState, Modifier.align(Alignment.TopCenter))
     }
 }
 
@@ -57,7 +74,7 @@ fun ListingItem(
                     Image(
                         painter = painterResource(R.mipmap.placeholder),
                         contentDescription = null,
-                        contentScale = ContentScale.FillWidth,
+                        contentScale = ContentScale.FillBounds,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(230.dp)
@@ -67,7 +84,7 @@ fun ListingItem(
                         model = listing.url,
                         contentDescription = null,
                         fallback = painterResource(R.mipmap.placeholder),
-                        contentScale = ContentScale.FillWidth,
+                        contentScale = ContentScale.FillBounds,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(230.dp)
@@ -89,9 +106,9 @@ fun ListingItem(
             Row(
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                Text(text = listing.price.toString())
-                Text(text = listing.area.toString())
-                Text(text = listing.bedrooms.toString())
+                Text(text = listing.price)
+                Text(text = listing.area)
+                Text(text = listing.bedrooms)
             }
 
             Text(text = listing.propertyType)
@@ -105,7 +122,7 @@ fun ListingItem(
 private fun ListingsContentPreview() {
     AVIVChallangeTheme {
         ListingsContent(
-            ListingsUiState.Content(
+            uiState = ListingsUiState.Content(
                 listings = listOf(
                     ListingCard(
                         id = 1,
@@ -133,7 +150,8 @@ private fun ListingsContentPreview() {
                 numberOfListings = 1,
                 isRefreshing = false,
                 hasError = false,
-            )
+            ),
+            handleUiEvent = {}
         )
     }
 }

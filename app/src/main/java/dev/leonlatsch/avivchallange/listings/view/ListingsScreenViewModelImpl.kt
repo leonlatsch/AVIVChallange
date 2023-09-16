@@ -7,12 +7,14 @@ import dev.leonlatsch.avivchallange.core.view.state.ErrorState
 import dev.leonlatsch.avivchallange.core.view.state.LoadingState
 import dev.leonlatsch.avivchallange.listings.domain.usecase.LoadListingsUseCase
 import dev.leonlatsch.avivchallange.listings.domain.usecase.ObserveListingsUseCase
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -35,17 +37,26 @@ class ListingsScreenViewModelImpl @Inject constructor(
         .onStart { refresh() }
         .stateIn(viewModelScope, SharingStarted.Eagerly, ListingsUiState.Loading)
 
-    private suspend fun refresh() {
-        loadingState.value = LoadingState.Loading
+    override fun handleUiEvent(event: ListingsUiEvent) {
+        when (event) {
+            is ListingsUiEvent.OpenListing -> TODO()
+            is ListingsUiEvent.Refresh -> refresh()
+        }
+    }
 
-        when (loadListings()) {
-            is Result.Success -> {
-                loadingState.value = LoadingState.NotLoading
-                errorState.value = ErrorState.NoError
-            }
-            is Result.Error -> {
-                loadingState.value = LoadingState.NotLoading
-                errorState.value = ErrorState.Error
+    private fun refresh() {
+        viewModelScope.launch {
+            loadingState.value = LoadingState.Loading
+
+            when (loadListings()) {
+                is Result.Success -> {
+                    loadingState.value = LoadingState.NotLoading
+                    errorState.value = ErrorState.NoError
+                }
+                is Result.Error -> {
+                    loadingState.value = LoadingState.NotLoading
+                    errorState.value = ErrorState.Error
+                }
             }
         }
     }

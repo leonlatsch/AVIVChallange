@@ -17,7 +17,10 @@ fun ListingsScreen(navController: NavHostController) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     when (uiState) {
-        is ListingsUiState.Content -> ListingsContent(uiState as ListingsUiState.Content)
+        is ListingsUiState.Content -> ListingsContent(
+            uiState = uiState as ListingsUiState.Content,
+            handleUiEvent = { viewModel.handleUiEvent(it) }
+        )
         is ListingsUiState.Error -> ListingsError()
         is ListingsUiState.Loading -> ListingsLoading()
     }

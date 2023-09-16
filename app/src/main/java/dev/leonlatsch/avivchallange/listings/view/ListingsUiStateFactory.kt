@@ -23,6 +23,7 @@ class ListingsUiStateFactory @Inject constructor() {
         }
     }
 
+    // TODO: formatting
     private fun mapListingToUiModel(listing: Listing): ListingCard = with(listing) {
         ListingCard(
             id = id,

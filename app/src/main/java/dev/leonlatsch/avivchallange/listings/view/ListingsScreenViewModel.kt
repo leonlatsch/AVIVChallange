@@ -5,4 +5,5 @@ import kotlinx.coroutines.flow.StateFlow
 
 abstract class ListingsScreenViewModel : ViewModel() {
     abstract val uiState: StateFlow<ListingsUiState>
+    abstract fun handleUiEvent(event: ListingsUiEvent)
 }
