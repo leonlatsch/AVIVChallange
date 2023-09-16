@@ -1,6 +1,7 @@
 package dev.leonlatsch.avivchallange.listings.view.compose
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,8 +16,10 @@ import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.Card
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -26,7 +29,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import dev.leonlatsch.avivchallange.R
-import dev.leonlatsch.avivchallange.listings.domain.model.Listing
 import dev.leonlatsch.avivchallange.listings.view.ListingCard
 import dev.leonlatsch.avivchallange.listings.view.ListingsUiEvent
 import dev.leonlatsch.avivchallange.listings.view.ListingsUiState
@@ -34,11 +36,21 @@ import dev.leonlatsch.avivchallange.theming.theme.AVIVChallangeTheme
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ListingsContent(uiState: ListingsUiState.Content, handleUiEvent: (ListingsUiEvent) -> Unit) {
+fun ListingsContent(
+    uiState: ListingsUiState.Content,
+    handleUiEvent: (ListingsUiEvent) -> Unit,
+    snackbarHostState: SnackbarHostState
+) {
     val pullRefreshState = rememberPullRefreshState(
         refreshing = uiState.isRefreshing,
         onRefresh = { handleUiEvent(ListingsUiEvent.Refresh) }
     )
+
+    LaunchedEffect(uiState.hasError) {
+        if (uiState.hasError) {
+            snackbarHostState.showSnackbar("Error refreshing listings")
+        }
+    }
 
     Box(
         modifier = Modifier.pullRefresh(pullRefreshState)
@@ -66,7 +78,7 @@ fun ListingItem(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier
+        modifier = modifier.clickable { onClick() }
     ) {
         Card {
             Box {
@@ -151,7 +163,8 @@ private fun ListingsContentPreview() {
                 isRefreshing = false,
                 hasError = false,
             ),
-            handleUiEvent = {}
+            handleUiEvent = {},
+            snackbarHostState = SnackbarHostState()
         )
     }
 }
