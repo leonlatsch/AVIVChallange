@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
-import dev.leonlatsch.avivchallange.listings.view.ListingsScreenViewModelImpl
+import dev.leonlatsch.avivchallange.listings.view.ListingsScreenViewModel
 import dev.leonlatsch.avivchallange.listings.view.ListingsUiState
 
 const val LISTINGS_SCREEN_NAV_PATH = "/listings"
@@ -23,7 +23,7 @@ const val LISTINGS_SCREEN_NAV_PATH = "/listings"
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListingsScreen(navController: NavHostController) {
-    val viewModel = hiltViewModel<ListingsScreenViewModelImpl>()
+    val viewModel = hiltViewModel<ListingsScreenViewModel>()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     val snackbarHostState = remember { SnackbarHostState() }

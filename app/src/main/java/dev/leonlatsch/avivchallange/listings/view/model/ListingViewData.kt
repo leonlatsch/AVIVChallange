@@ -1,6 +1,6 @@
-package dev.leonlatsch.avivchallange.listings.view
+package dev.leonlatsch.avivchallange.listings.view.model
 
-data class ListingCard(
+data class ListingViewData(
     val id: Int,
     val bedrooms: String?,
     val city: String,

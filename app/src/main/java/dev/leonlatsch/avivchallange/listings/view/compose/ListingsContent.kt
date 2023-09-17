@@ -30,7 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import dev.leonlatsch.avivchallange.R
-import dev.leonlatsch.avivchallange.listings.view.ListingCard
+import dev.leonlatsch.avivchallange.listings.view.model.ListingViewData
 import dev.leonlatsch.avivchallange.listings.view.ListingsUiEvent
 import dev.leonlatsch.avivchallange.listings.view.ListingsUiState
 import dev.leonlatsch.avivchallange.theming.theme.AVIVChallangeTheme
@@ -74,7 +74,7 @@ fun ListingsContent(
 
 @Composable
 fun ListingItem(
-    listing: ListingCard,
+    listing: ListingViewData,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -149,7 +149,7 @@ private fun ListingsContentPreview() {
         ListingsContent(
             uiState = ListingsUiState.Content(
                 listings = listOf(
-                    ListingCard(
+                    ListingViewData(
                         id = 1,
                         bedrooms = "4 Bedrooms",
                         city = "Hamburg",
@@ -160,7 +160,7 @@ private fun ListingsContentPreview() {
                         propertyType = "Maison - Villa",
                         rooms = "8 Rooms Total",
                     ),
-                    ListingCard(
+                    ListingViewData(
                         id = 2,
                         bedrooms = "4 Bedrooms",
                         city = "Hamburg",
