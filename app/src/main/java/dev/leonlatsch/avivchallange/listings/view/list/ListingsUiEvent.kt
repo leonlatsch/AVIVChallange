@@ -1,4 +1,4 @@
-package dev.leonlatsch.avivchallange.listings.view
+package dev.leonlatsch.avivchallange.listings.view.list
 
 sealed interface ListingsUiEvent {
     data object Refresh : ListingsUiEvent

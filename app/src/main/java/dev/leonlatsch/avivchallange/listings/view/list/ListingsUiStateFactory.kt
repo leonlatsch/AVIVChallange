@@ -1,8 +1,9 @@
-package dev.leonlatsch.avivchallange.listings.view
+package dev.leonlatsch.avivchallange.listings.view.list
 
 import dev.leonlatsch.avivchallange.core.view.state.ErrorState
 import dev.leonlatsch.avivchallange.core.view.state.LoadingState
 import dev.leonlatsch.avivchallange.listings.domain.model.Listing
+import dev.leonlatsch.avivchallange.listings.view.ListingDomainToUiMapper
 import javax.inject.Inject
 
 class ListingsUiStateFactory @Inject constructor(

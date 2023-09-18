@@ -1,4 +1,4 @@
-package dev.leonlatsch.avivchallange.listings.view.compose
+package dev.leonlatsch.avivchallange.listings.view.list.compose
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

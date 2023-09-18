@@ -1,4 +1,4 @@
-package dev.leonlatsch.avivchallange.listings.view
+package dev.leonlatsch.avivchallange.listings.view.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

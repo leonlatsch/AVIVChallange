@@ -1,4 +1,4 @@
-package dev.leonlatsch.avivchallange.listings.view.compose
+package dev.leonlatsch.avivchallange.listings.view.list.compose
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -16,8 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
-import dev.leonlatsch.avivchallange.listings.view.ListingsScreenViewModel
-import dev.leonlatsch.avivchallange.listings.view.ListingsUiState
+import dev.leonlatsch.avivchallange.listings.view.list.ListingsScreenViewModel
+import dev.leonlatsch.avivchallange.listings.view.list.ListingsUiState
 import dev.leonlatsch.avivchallange.listings.view.navigation.LaunchNavigationEffect
 
 const val LISTINGS_SCREEN_NAV_PATH = "/listings"

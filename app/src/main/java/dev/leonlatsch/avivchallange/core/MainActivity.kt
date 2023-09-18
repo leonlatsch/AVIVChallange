@@ -9,8 +9,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
-import dev.leonlatsch.avivchallange.listings.view.compose.LISTINGS_SCREEN_NAV_PATH
-import dev.leonlatsch.avivchallange.listings.view.compose.ListingsScreen
+import dev.leonlatsch.avivchallange.listings.view.list.compose.LISTINGS_SCREEN_NAV_PATH
+import dev.leonlatsch.avivchallange.listings.view.list.compose.ListingsScreen
 import dev.leonlatsch.avivchallange.listings.view.detail.compose.ARG_LISTING_DETAIL
 import dev.leonlatsch.avivchallange.listings.view.detail.compose.LISTING_DETAIL_SCREEN_NAV_ROUTE
 import dev.leonlatsch.avivchallange.listings.view.detail.compose.ListingDetailScreen

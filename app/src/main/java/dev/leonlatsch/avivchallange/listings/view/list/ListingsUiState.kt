@@ -1,4 +1,4 @@
-package dev.leonlatsch.avivchallange.listings.view
+package dev.leonlatsch.avivchallange.listings.view.list
 
 import dev.leonlatsch.avivchallange.listings.view.model.ListingViewData
 

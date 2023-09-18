@@ -1,4 +1,4 @@
-package dev.leonlatsch.avivchallange.listings.view.compose
+package dev.leonlatsch.avivchallange.listings.view.list.compose
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -31,8 +31,8 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import dev.leonlatsch.avivchallange.R
 import dev.leonlatsch.avivchallange.listings.view.model.ListingViewData
-import dev.leonlatsch.avivchallange.listings.view.ListingsUiEvent
-import dev.leonlatsch.avivchallange.listings.view.ListingsUiState
+import dev.leonlatsch.avivchallange.listings.view.list.ListingsUiEvent
+import dev.leonlatsch.avivchallange.listings.view.list.ListingsUiState
 import dev.leonlatsch.avivchallange.theming.theme.AVIVChallangeTheme
 
 @OptIn(ExperimentalMaterialApi::class)
