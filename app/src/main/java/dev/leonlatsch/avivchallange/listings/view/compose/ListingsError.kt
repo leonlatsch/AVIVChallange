@@ -21,7 +21,8 @@ fun ListingsError(handleUiEvent: (ListingsUiEvent) -> Unit) {
 
     Box(modifier = Modifier.fillMaxSize()) {
        Column(
-           modifier = Modifier.align(Alignment.Center)
+           modifier = Modifier.align(Alignment.Center),
+           horizontalAlignment = Alignment.CenterHorizontally,
        ) {
            Text(
                text = "Error loading Listings",
