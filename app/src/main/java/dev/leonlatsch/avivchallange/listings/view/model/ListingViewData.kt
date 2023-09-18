@@ -9,5 +9,5 @@ data class ListingViewData(
     val price: String,
     val professional: String,
     val propertyType: String,
-    val rooms: String,
+    val rooms: String?,
 )

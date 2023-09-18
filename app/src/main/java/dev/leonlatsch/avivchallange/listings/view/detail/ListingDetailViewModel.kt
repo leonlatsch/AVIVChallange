@@ -54,4 +54,10 @@ class ListingDetailViewModel @Inject constructor(
             loadingState.value = LoadingState.NotLoading
         }
     }
+
+    fun handleUiEvent(event: ListingDetailUiEvent) {
+        when (event) {
+            ListingDetailUiEvent.Refresh -> refresh()
+        }
+    }
 }

@@ -19,14 +19,14 @@ class ListingDomainToUiMapper @Inject constructor() : Mapper<Listing, ListingVie
     override fun map(from: Listing): ListingViewData = with(from) {
         ListingViewData(
             id = id,
-            bedrooms = bedrooms?.let { "$it bedrooms" },
+            bedrooms = bedrooms.toString(),
             city = city,
             area = "$area M²",
             url = url,
             price = currencyFormat.format(price),
             professional = professional,
             propertyType = propertyType,
-            rooms = "$rooms total rooms"
+            rooms = rooms.toString()
         )
     }
 

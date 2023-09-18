@@ -12,7 +12,6 @@ import dev.leonlatsch.avivchallange.listings.view.list.ListingsUiEvent
 
 @Composable
 fun ListingsError(handleUiEvent: (ListingsUiEvent) -> Unit) {
-
     Box(modifier = Modifier.fillMaxSize()) {
        Column(
            modifier = Modifier.align(Alignment.Center),

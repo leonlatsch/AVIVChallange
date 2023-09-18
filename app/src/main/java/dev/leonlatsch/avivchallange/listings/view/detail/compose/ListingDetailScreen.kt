@@ -57,9 +57,13 @@ fun ListingDetailScreen(navController: NavHostController) {
     ) { contentPadding ->
         Box(modifier = Modifier.padding(contentPadding)) {
             when (uiState) {
-                is ListingDetailUiState.Content -> ListingDetailContent(uiState as ListingDetailUiState.Content)
+                is ListingDetailUiState.Content -> ListingDetailContent(
+                    uiState as ListingDetailUiState.Content,
+                    handleUiEvent = { viewModel.handleUiEvent(it) },
+                    snackbarHostState = snackbarHostState,
+                )
                 is ListingDetailUiState.Loading -> ListingDetailLoading()
-                is ListingDetailUiState.Error -> ListingDetailError()
+                is ListingDetailUiState.Error -> ListingDetailError(handleUiEvent = { viewModel.handleUiEvent(it) })
             }
         }
     }

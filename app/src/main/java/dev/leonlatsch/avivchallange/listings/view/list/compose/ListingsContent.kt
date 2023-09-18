@@ -23,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.painterResource
@@ -34,6 +35,8 @@ import dev.leonlatsch.avivchallange.listings.view.model.ListingViewData
 import dev.leonlatsch.avivchallange.listings.view.list.ListingsUiEvent
 import dev.leonlatsch.avivchallange.listings.view.list.ListingsUiState
 import dev.leonlatsch.avivchallange.theming.theme.AVIVChallangeTheme
+import dev.leonlatsch.avivchallange.theming.theme.textStyleBig
+import dev.leonlatsch.avivchallange.theming.theme.textStyleMedium
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -87,7 +90,7 @@ fun ListingItem(
                     Image(
                         painter = painterResource(R.mipmap.placeholder),
                         contentDescription = null,
-                        contentScale = ContentScale.FillBounds,
+                        contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(230.dp)
@@ -97,7 +100,7 @@ fun ListingItem(
                         model = listing.url,
                         contentDescription = null,
                         fallback = painterResource(R.mipmap.placeholder),
-                        contentScale = ContentScale.FillBounds,
+                        contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(230.dp)
@@ -106,6 +109,8 @@ fun ListingItem(
 
                 Text(
                     text = listing.professional,
+                    style = textStyleBig(),
+                    color = Color.White,
                     modifier = Modifier
                         .align(Alignment.BottomStart)
                         .padding(12.dp)
@@ -119,10 +124,11 @@ fun ListingItem(
             Row(
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                Text(text = listing.price)
-                Text(text = listing.area)
-                if (listing.bedrooms != null) {
-                    Text(text = listing.bedrooms)
+                Text(text = listing.price, style = textStyleBig())
+                Text(text = listing.area, style = textStyleMedium())
+                when {
+                    listing.bedrooms != null -> Text(text = "${listing.bedrooms} bedrooms", style = textStyleMedium())
+                    listing.rooms != null -> Text(text = "${listing.rooms} total rooms", style = textStyleMedium())
                 }
             }
 
@@ -130,13 +136,13 @@ fun ListingItem(
                 horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 Icon(painter = painterResource(R.drawable.ic_house), contentDescription = null)
-                Text(text = listing.propertyType)
+                Text(text = listing.propertyType, style = textStyleMedium())
             }
             Row(
                 horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 Icon(painter = painterResource(R.drawable.ic_location), contentDescription = null)
-                Text(text = listing.city)
+                Text(text = listing.city, style = textStyleMedium())
             }
         }
     }
@@ -151,25 +157,36 @@ private fun ListingsContentPreview() {
                 listings = listOf(
                     ListingViewData(
                         id = 1,
-                        bedrooms = "4 Bedrooms",
+                        bedrooms = "4",
                         city = "Hamburg",
-                        area = "200 M2",
+                        area = "200 M²",
                         url = "https://v.seloger.com/s/crop/590x330/visuels/1/7/t/3/17t3fitclms3bzwv8qshbyzh9dw32e9l0p0udr80k.jpg",
                         price = "150.000 €",
                         professional = "GSL EXPLORE",
                         propertyType = "Maison - Villa",
-                        rooms = "8 Rooms Total",
+                        rooms = "8",
                     ),
                     ListingViewData(
                         id = 2,
-                        bedrooms = "4 Bedrooms",
+                        bedrooms = null,
                         city = "Hamburg",
-                        area = "200 M2",
+                        area = "200 M²",
                         url = "https://v.seloger.com/s/crop/590x330/visuels/1/7/t/3/17t3fitclms3bzwv8qshbyzh9dw32e9l0p0udr80k.jpg",
                         price = "150.000 €",
                         professional = "GSL EXPLORE",
                         propertyType = "Maison - Villa",
-                        rooms = "8 Rooms Total",
+                        rooms = "8",
+                    ),
+                    ListingViewData(
+                        id = 3,
+                        bedrooms = null,
+                        city = "Hamburg",
+                        area = "200 M²",
+                        url = "https://v.seloger.com/s/crop/590x330/visuels/1/7/t/3/17t3fitclms3bzwv8qshbyzh9dw32e9l0p0udr80k.jpg",
+                        price = "150.000 €",
+                        professional = "GSL EXPLORE",
+                        propertyType = "Maison - Villa",
+                        rooms = null,
                     ),
                 ),
                 numberOfListings = 1,
