@@ -1,6 +1,6 @@
 package dev.leonlatsch.avivchallange.listings.domain.usecase
 
-import dev.leonlatsch.avivchallange.core.Result
+import dev.leonlatsch.avivchallange.core.model.Result
 import dev.leonlatsch.avivchallange.listings.domain.ListingRepository
 import dev.leonlatsch.avivchallange.listings.domain.model.Listing
 import javax.inject.Inject

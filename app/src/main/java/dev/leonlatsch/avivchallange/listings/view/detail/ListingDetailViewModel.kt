@@ -4,12 +4,12 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.leonlatsch.avivchallange.core.Result
+import dev.leonlatsch.avivchallange.core.model.Result
 import dev.leonlatsch.avivchallange.core.view.state.ErrorState
 import dev.leonlatsch.avivchallange.core.view.state.LoadingState
 import dev.leonlatsch.avivchallange.listings.domain.model.Listing
 import dev.leonlatsch.avivchallange.listings.domain.usecase.GetListingDetailUseCase
-import dev.leonlatsch.avivchallange.listings.view.detail.compose.ARG_LISTING_DETAIL
+import dev.leonlatsch.avivchallange.listings.view.detail.compose.ARG_LISTING_DETAIL_ID
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
@@ -25,7 +25,7 @@ class ListingDetailViewModel @Inject constructor(
     private val listingDetailUiStateFactory: ListingDetailUiStateFactory,
 ): ViewModel() {
 
-    private val listingId = savedStateHandle.get<Int>(ARG_LISTING_DETAIL) ?: throw IllegalArgumentException("Argument $ARG_LISTING_DETAIL not passed")
+    private val listingId = savedStateHandle.get<Int>(ARG_LISTING_DETAIL_ID) ?: throw IllegalArgumentException("Argument $ARG_LISTING_DETAIL_ID not passed")
 
     private val listingDetailFlow = MutableStateFlow<Listing?>(null)
     private val loadingState = MutableStateFlow(LoadingState.NotLoading)

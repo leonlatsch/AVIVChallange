@@ -4,7 +4,7 @@ import dev.leonlatsch.avivchallange.listings.data.mapper.ListingResponseToDomain
 import dev.leonlatsch.avivchallange.listings.data.remote.ListingRemoteDataSource
 import dev.leonlatsch.avivchallange.listings.domain.ListingRepository
 import dev.leonlatsch.avivchallange.listings.domain.model.Listing
-import dev.leonlatsch.avivchallange.core.Result
+import dev.leonlatsch.avivchallange.core.model.Result
 import javax.inject.Inject
 
 class ListingRepositoryImpl @Inject constructor(

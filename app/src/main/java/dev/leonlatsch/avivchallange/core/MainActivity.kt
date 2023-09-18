@@ -9,11 +9,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
-import dev.leonlatsch.avivchallange.listings.view.list.compose.LISTINGS_SCREEN_NAV_PATH
 import dev.leonlatsch.avivchallange.listings.view.list.compose.ListingsScreen
-import dev.leonlatsch.avivchallange.listings.view.detail.compose.ARG_LISTING_DETAIL
-import dev.leonlatsch.avivchallange.listings.view.detail.compose.LISTING_DETAIL_SCREEN_NAV_ROUTE
 import dev.leonlatsch.avivchallange.listings.view.detail.compose.ListingDetailScreen
+import dev.leonlatsch.avivchallange.listings.view.detail.compose.ListingDetailScreenNavRoute
+import dev.leonlatsch.avivchallange.listings.view.list.compose.ListingsScreenNavRoute
 import dev.leonlatsch.avivchallange.theming.theme.AVIVChallangeTheme
 
 @AndroidEntryPoint
@@ -26,11 +25,11 @@ class MainActivity : ComponentActivity() {
             AVIVChallangeTheme {
                 val navController = rememberNavController()
 
-                NavHost(navController = navController, startDestination = LISTINGS_SCREEN_NAV_PATH) {
-                    composable(LISTINGS_SCREEN_NAV_PATH) { ListingsScreen(navController) }
+                NavHost(navController = navController, startDestination = ListingsScreenNavRoute.route) {
+                    composable(ListingsScreenNavRoute.route) { ListingsScreen(navController) }
                     composable(
-                        LISTING_DETAIL_SCREEN_NAV_ROUTE,
-                        listOf(navArgument(ARG_LISTING_DETAIL) { type = NavType.IntType })
+                        ListingDetailScreenNavRoute.route,
+                        listOf(navArgument(ListingDetailScreenNavRoute.ARG_LISTING_DETAIL_ID) { type = NavType.IntType })
                     ) {
                         ListingDetailScreen(navController)
                     }

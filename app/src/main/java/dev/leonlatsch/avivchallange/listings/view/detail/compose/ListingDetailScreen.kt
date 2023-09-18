@@ -20,11 +20,17 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import dev.leonlatsch.avivchallange.R
+import dev.leonlatsch.avivchallange.core.model.NavRoute
 import dev.leonlatsch.avivchallange.listings.view.detail.ListingDetailUiState
 import dev.leonlatsch.avivchallange.listings.view.detail.ListingDetailViewModel
+import dev.leonlatsch.avivchallange.listings.view.list.compose.ListingsScreenNavRoute
 
-const val ARG_LISTING_DETAIL = "listingId"
-const val LISTING_DETAIL_SCREEN_NAV_ROUTE = "/listings/{$ARG_LISTING_DETAIL}"
+object ListingDetailScreenNavRoute : NavRoute {
+    const val ARG_LISTING_DETAIL_ID = "listingId"
+    override val route: String = "${ListingsScreenNavRoute.route}/{$ARG_LISTING_DETAIL_ID}"
+
+    fun buildRoute(listingId: Int): String = "${ListingsScreenNavRoute.route}/$listingId"
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

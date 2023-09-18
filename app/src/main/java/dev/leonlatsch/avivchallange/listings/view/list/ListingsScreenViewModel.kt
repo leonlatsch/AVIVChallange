@@ -3,7 +3,7 @@ package dev.leonlatsch.avivchallange.listings.view.list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.leonlatsch.avivchallange.core.Result
+import dev.leonlatsch.avivchallange.core.model.Result
 import dev.leonlatsch.avivchallange.core.view.state.ErrorState
 import dev.leonlatsch.avivchallange.core.view.state.LoadingState
 import dev.leonlatsch.avivchallange.listings.domain.model.Listing

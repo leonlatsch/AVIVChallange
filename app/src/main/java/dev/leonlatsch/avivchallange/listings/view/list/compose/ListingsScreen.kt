@@ -16,11 +16,14 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
+import dev.leonlatsch.avivchallange.core.model.NavRoute
 import dev.leonlatsch.avivchallange.listings.view.list.ListingsScreenViewModel
 import dev.leonlatsch.avivchallange.listings.view.list.ListingsUiState
 import dev.leonlatsch.avivchallange.listings.view.navigation.LaunchNavigationEffect
 
-const val LISTINGS_SCREEN_NAV_PATH = "/listings"
+object ListingsScreenNavRoute : NavRoute {
+    override val route: String = "/listings"
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

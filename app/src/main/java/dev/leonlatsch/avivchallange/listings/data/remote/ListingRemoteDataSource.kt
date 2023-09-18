@@ -3,7 +3,7 @@ package dev.leonlatsch.avivchallange.listings.data.remote
 import android.util.Log
 import dev.leonlatsch.avivchallange.listings.data.remote.model.ListingResponse
 import dev.leonlatsch.avivchallange.listings.data.remote.model.ListingsResponse
-import dev.leonlatsch.avivchallange.core.Result
+import dev.leonlatsch.avivchallange.core.model.Result
 import java.io.IOException
 import javax.inject.Inject
 

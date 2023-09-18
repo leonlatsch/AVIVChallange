@@ -1,4 +1,4 @@
-package dev.leonlatsch.avivchallange.core
+package dev.leonlatsch.avivchallange.core.model
 
 sealed class Result<out T> {
     data class Success<T>(val data: T) : Result<T>()
