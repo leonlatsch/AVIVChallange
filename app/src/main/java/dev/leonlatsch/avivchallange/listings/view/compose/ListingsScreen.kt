@@ -18,6 +18,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import dev.leonlatsch.avivchallange.listings.view.ListingsScreenViewModel
 import dev.leonlatsch.avivchallange.listings.view.ListingsUiState
+import dev.leonlatsch.avivchallange.listings.view.navigation.LaunchNavigationEffect
 
 const val LISTINGS_SCREEN_NAV_PATH = "/listings"
 
@@ -27,11 +28,14 @@ fun ListingsScreen(navController: NavHostController) {
     val viewModel = hiltViewModel<ListingsScreenViewModel>()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    val snackbarHostState = remember { SnackbarHostState() }
-
     LaunchedEffect(0) {
         viewModel.refresh()
     }
+
+    val navigationEvent by viewModel.eventFlow.collectAsStateWithLifecycle(null)
+    LaunchNavigationEffect(navigationEvent, navController)
+
+    val snackbarHostState = remember { SnackbarHostState() }
 
     Scaffold(
         topBar = {

@@ -24,7 +24,7 @@ import dev.leonlatsch.avivchallange.listings.view.detail.ListingDetailUiState
 import dev.leonlatsch.avivchallange.listings.view.detail.ListingDetailViewModel
 
 const val ARG_LISTING_DETAIL = "listingId"
-const val LISTING_DETAIL_SCREEN_NAV_PATH = "/listings/{$ARG_LISTING_DETAIL}"
+const val LISTING_DETAIL_SCREEN_NAV_ROUTE = "/listings/{$ARG_LISTING_DETAIL}"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

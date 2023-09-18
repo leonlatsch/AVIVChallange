@@ -8,9 +8,12 @@ import dev.leonlatsch.avivchallange.core.view.state.ErrorState
 import dev.leonlatsch.avivchallange.core.view.state.LoadingState
 import dev.leonlatsch.avivchallange.listings.domain.model.Listing
 import dev.leonlatsch.avivchallange.listings.domain.usecase.GetListingsUseCase
+import dev.leonlatsch.avivchallange.listings.view.navigation.ListingsScreenNavigationEvent
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -33,9 +36,14 @@ class ListingsScreenViewModel @Inject constructor(
         listingsUiStateFactory.create(listings, loadingState, errorState)
     }.stateIn(viewModelScope, SharingStarted.Eagerly, ListingsUiState.Loading)
 
+    private val eventChannel = Channel<ListingsScreenNavigationEvent>(Channel.UNLIMITED)
+    val eventFlow = eventChannel.receiveAsFlow()
+
     fun handleUiEvent(event: ListingsUiEvent) {
         when (event) {
-            is ListingsUiEvent.OpenListing -> TODO()
+            is ListingsUiEvent.OpenListing -> {
+                eventChannel.trySend(ListingsScreenNavigationEvent.OpenDetailScreen(event.listingId))
+            }
             is ListingsUiEvent.Refresh -> refresh()
         }
     }
