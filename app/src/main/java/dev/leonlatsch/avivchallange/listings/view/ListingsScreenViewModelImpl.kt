@@ -5,37 +5,33 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.leonlatsch.avivchallange.core.Result
 import dev.leonlatsch.avivchallange.core.view.state.ErrorState
 import dev.leonlatsch.avivchallange.core.view.state.LoadingState
-import dev.leonlatsch.avivchallange.listings.domain.usecase.LoadListingsUseCase
-import dev.leonlatsch.avivchallange.listings.domain.usecase.ObserveListingsUseCase
-import kotlinx.coroutines.delay
+import dev.leonlatsch.avivchallange.listings.domain.model.Listing
+import dev.leonlatsch.avivchallange.listings.domain.usecase.GetListingsUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ListingsScreenViewModelImpl @Inject constructor(
-    observeListings: ObserveListingsUseCase,
-    private val loadListings: LoadListingsUseCase,
+    private val getListings: GetListingsUseCase,
     private val listingsUiStateFactory: ListingsUiStateFactory
 ) : ListingsScreenViewModel() {
 
+    private val listingsFlow = MutableStateFlow(emptyList<Listing>())
     private val loadingState = MutableStateFlow(LoadingState.NotLoading)
     private val errorState = MutableStateFlow(ErrorState.NoError)
 
-    override val uiState: StateFlow<ListingsUiState> = combine(
-        observeListings(),
+    override val uiState = combine(
+        listingsFlow,
         loadingState,
-        errorState
+        errorState,
     ) { listings, loadingState, errorState ->
         listingsUiStateFactory.create(listings, loadingState, errorState)
-    }
-        .onStart { refresh() }
-        .stateIn(viewModelScope, SharingStarted.Eagerly, ListingsUiState.Loading)
+    }.stateIn(viewModelScope, SharingStarted.Eagerly, ListingsUiState.Loading)
 
     override fun handleUiEvent(event: ListingsUiEvent) {
         when (event) {
@@ -44,20 +40,19 @@ class ListingsScreenViewModelImpl @Inject constructor(
         }
     }
 
-    private fun refresh() {
+    override fun refresh() {
         viewModelScope.launch {
             loadingState.value = LoadingState.Loading
+            errorState.value = ErrorState.NoError
 
-            when (loadListings()) {
-                is Result.Success -> {
-                    loadingState.value = LoadingState.NotLoading
-                    errorState.value = ErrorState.NoError
-                }
+            when (val result = getListings()) {
+                is Result.Success -> listingsFlow.value = result.data
                 is Result.Error -> {
-                    loadingState.value = LoadingState.NotLoading
                     errorState.value = ErrorState.Error
                 }
             }
+
+            loadingState.value = LoadingState.NotLoading
         }
     }
 }

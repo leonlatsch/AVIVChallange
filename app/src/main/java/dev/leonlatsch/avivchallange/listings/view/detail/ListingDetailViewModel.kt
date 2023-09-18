@@ -5,5 +5,6 @@ import kotlinx.coroutines.flow.StateFlow
 
 abstract class ListingDetailViewModel : ViewModel() {
     abstract val uiState: StateFlow<ListingDetailUiState>
+    abstract fun refresh()
 }
 

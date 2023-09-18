@@ -2,10 +2,12 @@ package dev.leonlatsch.avivchallange.listings.domain.usecase
 
 import dev.leonlatsch.avivchallange.core.Result
 import dev.leonlatsch.avivchallange.listings.domain.ListingRepository
+import dev.leonlatsch.avivchallange.listings.domain.model.Listing
 import javax.inject.Inject
 
-class LoadListingsUseCase @Inject constructor(
+class GetListingDetailUseCase @Inject constructor(
     private val listingRepository: ListingRepository,
 ) {
-    suspend operator fun invoke(): Result<Unit> = listingRepository.loadListings()
+    suspend operator fun invoke(listingId: Int): Result<Listing> =
+        listingRepository.getListingDetail(listingId)
 }
