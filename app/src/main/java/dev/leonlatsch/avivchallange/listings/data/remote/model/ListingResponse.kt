@@ -1,6 +1,5 @@
 package dev.leonlatsch.avivchallange.listings.data.remote.model
 
-import androidx.room.PrimaryKey
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
