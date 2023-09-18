@@ -53,7 +53,7 @@ fun ListingsScreen(navController: NavHostController) {
                     snackbarHostState
                 )
 
-                is ListingsUiState.Error -> ListingsError()
+                is ListingsUiState.Error -> ListingsError(handleUiEvent = { viewModel.handleUiEvent(it) })
                 is ListingsUiState.Loading -> ListingsLoading()
             }
         }
