@@ -9,7 +9,7 @@ import dev.leonlatsch.avivchallange.core.view.state.ErrorState
 import dev.leonlatsch.avivchallange.core.view.state.LoadingState
 import dev.leonlatsch.avivchallange.listings.domain.model.Listing
 import dev.leonlatsch.avivchallange.listings.domain.usecase.GetListingDetailUseCase
-import dev.leonlatsch.avivchallange.listings.view.detail.compose.ARG_LISTING_DETAIL_ID
+import dev.leonlatsch.avivchallange.listings.view.detail.compose.ListingDetailScreenNavRoute.ARG_LISTING_DETAIL_ID
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine

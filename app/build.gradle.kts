@@ -90,10 +90,16 @@ dependencies {
     // Coil - Image Loading
     implementation("io.coil-kt:coil-compose:2.4.0")
 
+    // Logging
+    implementation("com.jakewharton.timber:timber:5.0.1")
+
     // Test
     testImplementation("com.google.dagger:hilt-android-testing:2.48")
     kaptTest("com.google.dagger:hilt-compiler:2.48")
+    testImplementation("io.mockk:mockk-android:1.13.7")
     testImplementation("junit:junit:4.13.2")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))

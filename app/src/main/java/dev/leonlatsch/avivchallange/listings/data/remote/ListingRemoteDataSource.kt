@@ -1,9 +1,9 @@
 package dev.leonlatsch.avivchallange.listings.data.remote
 
-import android.util.Log
+import dev.leonlatsch.avivchallange.core.model.Result
 import dev.leonlatsch.avivchallange.listings.data.remote.model.ListingResponse
 import dev.leonlatsch.avivchallange.listings.data.remote.model.ListingsResponse
-import dev.leonlatsch.avivchallange.core.model.Result
+import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
 
@@ -15,7 +15,7 @@ class ListingRemoteDataSource @Inject constructor(
         val listings = listingApi.getListings()
         Result.Success(listings)
     } catch (e: IOException) {
-        Log.e(ListingRemoteDataSource::class.simpleName, "Error getting listings: $e")
+        Timber.d("Error getting listings: $e")
         Result.Error(e)
     }
 
@@ -23,7 +23,7 @@ class ListingRemoteDataSource @Inject constructor(
         val listings = listingApi.getListingDetail(listingId)
         Result.Success(listings)
     } catch (e: IOException) {
-        Log.e(ListingRemoteDataSource::class.simpleName, "Error getting listing detail: $e")
+        Timber.d("Error getting listing detail: $e")
         Result.Error(e)
     }
 }
