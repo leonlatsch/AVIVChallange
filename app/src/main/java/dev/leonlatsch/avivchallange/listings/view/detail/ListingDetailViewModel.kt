@@ -28,7 +28,7 @@ class ListingDetailViewModel @Inject constructor(
     private val listingId = savedStateHandle.get<Int>(ARG_LISTING_DETAIL_ID) ?: throw IllegalArgumentException("Argument $ARG_LISTING_DETAIL_ID not passed")
 
     private val listingDetailFlow = MutableStateFlow<Listing?>(null)
-    private val loadingState = MutableStateFlow(LoadingState.NotLoading)
+    private val loadingState = MutableStateFlow(LoadingState.Loading)
     private val errorState = MutableStateFlow(ErrorState.NoError)
 
     val uiState = combine(
@@ -37,7 +37,7 @@ class ListingDetailViewModel @Inject constructor(
         errorState
     ) { listingDetail, loadingState, errorState ->
         listingDetailUiStateFactory.create(listingDetail, loadingState, errorState)
-    }.stateIn(viewModelScope, SharingStarted.Eagerly, ListingDetailUiState.Loading)
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), ListingDetailUiState.Loading)
 
     fun refresh() {
         viewModelScope.launch {
