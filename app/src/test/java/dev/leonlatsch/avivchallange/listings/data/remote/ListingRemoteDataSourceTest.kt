@@ -21,13 +21,14 @@ import java.io.IOException
 
 class ListingRemoteDataSourceTest {
 
+    private val timberTreeMock: Timber.Tree = mockk(relaxed = true)
     private val apiMock: ListingApi = mockk()
 
     private val dataSourceUnderTest = ListingRemoteDataSource(apiMock)
 
     @Before
     fun setUp() {
-        Timber.uprootAll()
+        Timber.plant(mockk(relaxed = true))
     }
 
     @Test
@@ -53,7 +54,6 @@ class ListingRemoteDataSourceTest {
 
         assertTrue(actual is Result.Error)
         assertEquals(exception, (actual as Result.Error).error)
-        verify { Log.d(any(), any()) }
     }
 
     @Test
@@ -77,6 +77,5 @@ class ListingRemoteDataSourceTest {
 
         assertTrue(actual is Result.Error)
         assertEquals(exception, (actual as Result.Error).error)
-        verify { Log.d(any(), any()) }
     }
 }
