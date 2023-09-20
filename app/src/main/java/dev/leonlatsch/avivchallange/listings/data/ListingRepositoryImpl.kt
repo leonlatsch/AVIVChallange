@@ -1,15 +1,17 @@
 package dev.leonlatsch.avivchallange.listings.data
 
+import dev.leonlatsch.avivchallange.core.Mapper
 import dev.leonlatsch.avivchallange.listings.data.mapper.ListingResponseToDomainMapper
 import dev.leonlatsch.avivchallange.listings.data.remote.ListingRemoteDataSource
 import dev.leonlatsch.avivchallange.listings.domain.ListingRepository
 import dev.leonlatsch.avivchallange.listings.domain.model.Listing
 import dev.leonlatsch.avivchallange.core.model.Result
+import dev.leonlatsch.avivchallange.listings.data.remote.model.ListingResponse
 import javax.inject.Inject
 
 class ListingRepositoryImpl @Inject constructor(
     private val remoteDataSource: ListingRemoteDataSource,
-    private val listingResponseToDomainMapper: ListingResponseToDomainMapper,
+    private val listingResponseToDomainMapper: Mapper<ListingResponse, Listing>,
 ) : ListingRepository {
 
     override suspend fun getListings(): Result<List<Listing>> =
