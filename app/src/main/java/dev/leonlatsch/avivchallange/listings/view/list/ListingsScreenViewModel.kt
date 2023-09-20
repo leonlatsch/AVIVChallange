@@ -25,7 +25,7 @@ class ListingsScreenViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val listingsFlow = MutableStateFlow(emptyList<Listing>())
-    private val loadingState = MutableStateFlow(LoadingState.NotLoading)
+    private val loadingState = MutableStateFlow(LoadingState.Loading)
     private val errorState = MutableStateFlow(ErrorState.NoError)
 
     val uiState = combine(
@@ -34,7 +34,7 @@ class ListingsScreenViewModel @Inject constructor(
         errorState,
     ) { listings, loadingState, errorState ->
         listingsUiStateFactory.create(listings, loadingState, errorState)
-    }.stateIn(viewModelScope, SharingStarted.Eagerly, ListingsUiState.Loading)
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), ListingsUiState.Loading)
 
     private val eventChannel = Channel<ListingsScreenNavigationEvent>(Channel.UNLIMITED)
     val eventFlow = eventChannel.receiveAsFlow()

@@ -41,12 +41,8 @@ class ListingDetailViewModelTest {
         coEvery { create(null, LoadingState.Loading, any()) } returns ListingDetailUiState.Loading
         coEvery { create(null, LoadingState.NotLoading, any()) } returns ListingDetailUiState.Error
 
-        coEvery {
-            create(FullListing, LoadingState.NotLoading, ErrorState.NoError)
-        } returns contentUiState
-        coEvery {
-            create(FullListing, LoadingState.NotLoading, ErrorState.Error)
-        } returns contentUiState.copy(hasError = true)
+        coEvery { create(FullListing, LoadingState.NotLoading, ErrorState.NoError) } returns contentUiState
+        coEvery { create(FullListing, LoadingState.NotLoading, ErrorState.Error) } returns contentUiState.copy(hasError = true)
     }
 
     private fun createViewModelUnderTest() = ListingDetailViewModel(
@@ -110,8 +106,6 @@ class ListingDetailViewModelTest {
     @Test
     fun `handleUiEvent(Refresh) triggers refresh`() {
         val viewModelUnderTest = createViewModelUnderTest()
-
-        coEvery { getListingDetailUseCaseMock.invoke(listingId) } returns Result.Success(FullListing)
 
         viewModelUnderTest.handleUiEvent(ListingDetailUiEvent.Refresh)
 
