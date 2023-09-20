@@ -8,6 +8,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
+const val BASE_API_URL = "https://gsl-apps-technical-test.dignp.com/"
+
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
@@ -15,7 +17,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideRetrofit(): Retrofit = Retrofit.Builder()
-        .baseUrl("https://gsl-apps-technical-test.dignp.com/")
+        .baseUrl(BASE_API_URL)
         .addConverterFactory(MoshiConverterFactory.create())
         .build()
 }
