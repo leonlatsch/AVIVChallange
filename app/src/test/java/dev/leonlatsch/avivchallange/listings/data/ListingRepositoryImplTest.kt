@@ -9,7 +9,6 @@ import dev.leonlatsch.avivchallange.listings.domain.model.Listing
 import dev.leonlatsch.avivchallange.listings.testdata.FullListing
 import dev.leonlatsch.avivchallange.listings.testdata.FullListingResponse
 import io.mockk.coEvery
-import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
