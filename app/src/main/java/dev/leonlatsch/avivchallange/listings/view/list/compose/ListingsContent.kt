@@ -59,15 +59,24 @@ fun ListingsContent(
     Box(
         modifier = Modifier.pullRefresh(pullRefreshState)
     ) {
-        LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(32.dp),
-            modifier = Modifier.padding(12.dp)
+        Column(
+            modifier = Modifier.padding(12.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            items(uiState.listings, key = { it.id }) { listing ->
-                ListingItem(
-                    listing = listing,
-                    onClick = { handleUiEvent(ListingsUiEvent.OpenListing(listing.id)) },
-                )
+            Text(
+                text = "${uiState.numberOfListings} listing(s) found",
+                style = textStyleMedium()
+            )
+
+            LazyColumn(
+                verticalArrangement = Arrangement.spacedBy(32.dp),
+            ) {
+                items(uiState.listings, key = { it.id }) { listing ->
+                    ListingItem(
+                        listing = listing,
+                        onClick = { handleUiEvent(ListingsUiEvent.OpenListing(listing.id)) },
+                    )
+                }
             }
         }
 
