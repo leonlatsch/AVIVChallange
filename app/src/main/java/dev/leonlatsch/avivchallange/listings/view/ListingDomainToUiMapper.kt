@@ -4,17 +4,11 @@ import dev.leonlatsch.avivchallange.core.Mapper
 import dev.leonlatsch.avivchallange.listings.domain.model.Listing
 import dev.leonlatsch.avivchallange.listings.view.model.ListingViewData
 import java.text.NumberFormat
-import java.util.Currency
 import javax.inject.Inject
 
-class ListingDomainToUiMapper @Inject constructor() : Mapper<Listing, ListingViewData> {
-
-    private val currencyFormat by lazy {
-        NumberFormat.getCurrencyInstance().apply {
-            maximumFractionDigits = 0
-            currency = Currency.getInstance("EUR")
-        }
-    }
+class ListingDomainToUiMapper @Inject constructor(
+    private val currencyFormat: NumberFormat,
+) : Mapper<Listing, ListingViewData> {
 
     override fun map(from: Listing): ListingViewData = with(from) {
         ListingViewData(
