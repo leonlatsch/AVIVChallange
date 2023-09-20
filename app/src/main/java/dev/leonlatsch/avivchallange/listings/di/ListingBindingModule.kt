@@ -10,6 +10,8 @@ import dev.leonlatsch.avivchallange.listings.data.mapper.ListingResponseToDomain
 import dev.leonlatsch.avivchallange.listings.data.remote.model.ListingResponse
 import dev.leonlatsch.avivchallange.listings.domain.ListingRepository
 import dev.leonlatsch.avivchallange.listings.domain.model.Listing
+import dev.leonlatsch.avivchallange.listings.view.ListingDomainToUiMapper
+import dev.leonlatsch.avivchallange.listings.view.model.ListingViewData
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -20,4 +22,7 @@ abstract class ListingBindingModule {
 
     @Binds
     abstract fun bindListingResponseToDomainMapper(impl: ListingResponseToDomainMapper): Mapper<ListingResponse, Listing>
+
+    @Binds
+    abstract fun bindListingDomainToUiMapper(impl: ListingDomainToUiMapper): Mapper<Listing, ListingViewData>
 }
