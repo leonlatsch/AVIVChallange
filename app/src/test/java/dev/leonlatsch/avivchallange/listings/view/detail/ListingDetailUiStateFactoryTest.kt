@@ -1,21 +1,16 @@
 package dev.leonlatsch.avivchallange.listings.view.detail
 
-import dev.leonlatsch.avivchallange.core.Mapper
 import dev.leonlatsch.avivchallange.core.view.state.ErrorState
 import dev.leonlatsch.avivchallange.core.view.state.LoadingState
-import dev.leonlatsch.avivchallange.listings.domain.model.Listing
 import dev.leonlatsch.avivchallange.listings.testdata.FullListing
 import dev.leonlatsch.avivchallange.listings.testdata.FullListingViewData
-import dev.leonlatsch.avivchallange.listings.view.model.ListingViewData
-import org.junit.Assert.*
+import dev.leonlatsch.avivchallange.listings.view.ListingListingViewDataMapperFake
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class ListingDetailUiStateFactoryTest {
 
-    private val listingDomainToUiMapperFake = object : Mapper<Listing, ListingViewData> {
-        var mappedValue = FullListingViewData
-        override fun map(from: Listing): ListingViewData = mappedValue
-    }
+    private val listingDomainToUiMapperFake = ListingListingViewDataMapperFake()
 
     private val factoryUnderTest = ListingDetailUiStateFactory(listingDomainToUiMapperFake)
 
@@ -59,3 +54,4 @@ class ListingDetailUiStateFactoryTest {
         assertEquals(expected, actual)
     }
 }
+
