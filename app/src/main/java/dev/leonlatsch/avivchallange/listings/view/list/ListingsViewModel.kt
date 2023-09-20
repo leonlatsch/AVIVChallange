@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ListingsScreenViewModel @Inject constructor(
+class ListingsViewModel @Inject constructor(
     private val getListings: GetListingsUseCase,
     private val listingsUiStateFactory: ListingsUiStateFactory
 ) : ViewModel() {

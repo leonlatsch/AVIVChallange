@@ -1,6 +1,5 @@
 package dev.leonlatsch.avivchallange.listings.view.list
 
-import androidx.lifecycle.viewmodel.compose.viewModel
 import app.cash.turbine.test
 import dev.leonlatsch.avivchallange.CoroutineTestRule
 import dev.leonlatsch.avivchallange.core.model.Result
@@ -14,12 +13,11 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 
-class ListingsScreenViewModelTest {
+class ListingsViewModelTest {
 
     @get:Rule
     val coroutineTestRule = CoroutineTestRule()
@@ -44,7 +42,7 @@ class ListingsScreenViewModelTest {
         coEvery { create(twoListings, LoadingState.NotLoading, ErrorState.Error) } returns contentUiState.copy(hasError = true)
     }
 
-    private fun createViewModelUnderTest() = ListingsScreenViewModel(getListingsUseCaseMock, listingsUiStateFactoryMock)
+    private fun createViewModelUnderTest() = ListingsViewModel(getListingsUseCaseMock, listingsUiStateFactoryMock)
 
     @Test
     fun `uiState loading - content - content with error`() = runTest {

@@ -17,7 +17,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import dev.leonlatsch.avivchallange.core.model.NavRoute
-import dev.leonlatsch.avivchallange.listings.view.list.ListingsScreenViewModel
+import dev.leonlatsch.avivchallange.listings.view.list.ListingsViewModel
 import dev.leonlatsch.avivchallange.listings.view.list.ListingsUiState
 import dev.leonlatsch.avivchallange.listings.view.navigation.LaunchNavigationEffect
 
@@ -28,7 +28,7 @@ object ListingsScreenNavRoute : NavRoute {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListingsScreen(navController: NavHostController) {
-    val viewModel = hiltViewModel<ListingsScreenViewModel>()
+    val viewModel = hiltViewModel<ListingsViewModel>()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(0) {
